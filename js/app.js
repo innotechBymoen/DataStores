@@ -35,7 +35,23 @@ for(let i=0; i<products.length; i++) {
                 product_image_url="${products[i][`image_url`]}">
             ADD
             </button>
-            
+
         </div>`
     );
+}
+
+function select_product(details) {
+    let selected = {
+        name: details[`target`].getAttribute(`product_name`),
+        image_url: details[`target`].getAttribute(`product_image_url`),
+        description: details[`target`].getAttribute(`product_description`),
+        price: details[`target`].getAttribute(`product_price`),
+    }
+    let selected_json = JSON.stringify(selected);
+    Cookies.set(`product_selected`, selected_json);
+}
+
+let product_buttons = document.querySelectorAll(`.product`);
+for(let i=0; i<product_buttons.length; i++) {
+    product_buttons[i].addEventListener(`click`, select_product);
 }
